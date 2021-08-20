@@ -5,14 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ToDoApplication from "./component/ToDoApplication";
 import { createStore } from 'redux';
-import { toDoReducer } from './redux/reducers/ToDoReducer';
+import { rootReducer, toDoReducer } from './redux/reducers/ToDoReducer';
+import { Provider } from "react-redux";
 
-const store = createStore(toDoReducer);
+const store = createStore(rootReducer);
+
 
 
 ReactDOM.render(
     <Provider store={store}>
-        <Routes></Routes>
+        <ToDoApplication></ToDoApplication>
     </Provider>,
     document.getElementById('root')
 )

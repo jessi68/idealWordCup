@@ -3,6 +3,7 @@ export const DELETE_TO_DO = "delete_to_do";
 export const COMPLETE_TO_DO ="complete_to_do";
 
 export function add(todo) {
+    console.log(todo);
     return {
         type: ADD_TO_DO,
         payload: todo

@@ -3,20 +3,23 @@ import { useSelector } from "react-redux";
 import ToDo from "./ToDo";
 
 
-export default class ToDos extends React.Component {
+export default function ToDos() {
 
-    constructor(props) {
-        super(props);
-        this.toToContents = useSelector(store => store.toDoReducer);
-    }
+   let toDoContents = useSelector(store => store.toDoReducer);
+   console.log(toDoContents)
+if(toDoContents === undefined) {
+    return (
+        <section>
 
-    render() {
-        const toDoViews = this.toDoContents.map((todo, idx) => {
-            return <ToDo text={todo}></ToDo>
+        </section>
+    )
+}
+        const toDoViews = toDoContents.map((todo, idx) => {
+            return <ToDo text={todo} key={idx}></ToDo>
         });
 
-        <section>
+        return (<section>
             {toDoViews}
-        </section>
-    }
+        </section>);
+    
 }
