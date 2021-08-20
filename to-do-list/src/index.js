@@ -4,10 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ToDoApplication from "./component/ToDoApplication";
+import { createStore } from 'redux';
+import { toDoReducer } from './redux/reducers/ToDoReducer';
 
-const rootElement = document.getElementById('root')
+const store = createStore(toDoReducer);
+
+
 ReactDOM.render(
     <Provider store={store}>
-        <ToDoApplication/>
-    </Provider>
+        <Routes></Routes>
+    </Provider>,
+    document.getElementById('root')
 )
+
+reportWebVitals();
