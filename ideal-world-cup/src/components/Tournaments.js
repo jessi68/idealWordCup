@@ -5,6 +5,7 @@ import Tournament from "./Tournament";
 export class Tournaments extends Component {
     constructor(props) {
         super(props);
+        this.defaultAnimation = "competition-image ";
         console.log(this.props.images);
         this.state = {index: 0};
     }
@@ -31,7 +32,8 @@ export class Tournaments extends Component {
         return(
         <div>
         <header className="head">{this.props.numberOfParticipants} 강전</header>
-        <Tournament leftImage={this.props.images[this.state.index]} rightImage={this.props.images[this.state.index + 1]}
+        <Tournament leftImage={this.props.images[this.state.index]} rightImage={this.props.images[this.state.index + 1]} 
+        defaultAnimation={this.defaultAnimation}
         changeToNextCompetition={this.changeToNextCompetition}/>
         </div>
         );
