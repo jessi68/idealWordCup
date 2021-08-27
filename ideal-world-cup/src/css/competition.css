@@ -25,13 +25,14 @@
 
 .disappear {
     animation: disappearAnimation;
-    animation-duration: 2000ms;
+    animation-duration: 3000ms;
     animation-fill-mode: forwards;
 }
 
 .focused {
     transition: transform .2s;
     transform: scale(1.5);
+    animation-duration: 3000ms;
 }
 
 .vs {
