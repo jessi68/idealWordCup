@@ -6,18 +6,34 @@ export class Tournaments extends Component {
     constructor(props) {
         super(props);
         this.defaultAnimation = "competition-image ";
-        console.log(this.props.images);
-        this.state = {index: 0};
+        this.state = {index: 0, nextTournamentParticipants: [], numberOfParticipants: this.props.numberOfParticipants,
+                      currentParticipants: this.props.currentParticipants};
+    }
+
+    addWinner = (winner) => {
+        this.setState({
+            ...this.state,
+            nextTournamentParticipants: this.state.nextTournamentParticipants.concat(winner)
+        });
+        
     }
     
-    isFinished = () => {
-        return this.state.index >= this.props.numberOfParticipants;
+    isFinishedThisRound = (newIndex) => {
+        return newIndex >= this.state.numberOfParticipants;
     }
 
     changeToNextCompetition = () => {
         let newIndex = this.state.index + 2;
 
-        if(this.isFinished(newIndex)) {
+        if(this.isFinishedThisRound(newIndex)) {
+            
+            this.state.numberOfParticipants = this.state.numberOfParticipants / 2;
+            this.setState({
+                ...this.state,
+                currentParticipants: [...this.state.nextTournamentParticipants],
+                nextTournamentParticipants: [],
+                index: 0
+            });
             return;
         }
         this.setState({
@@ -27,15 +43,26 @@ export class Tournaments extends Component {
     }
 
     render() {
-        console.log(this.state.index);
-        console.log(this.props.images[this.state.index]);
         return(
+        <>
+       
+        {this.state.numberOfParticipants >= 2 ? 
         <div>
-        <header className="head">{this.props.numberOfParticipants} 강전</header>
-        <Tournament leftImage={this.props.images[this.state.index]} rightImage={this.props.images[this.state.index + 1]} 
+        <header className="head">{this.state.numberOfParticipants} 강전</header>
+        <Tournament leftImage={this.state.currentParticipants[this.state.index]} 
+        rightImage={this.state.currentParticipants[this.state.index + 1]} 
         defaultAnimation={this.defaultAnimation}
-        changeToNextCompetition={this.changeToNextCompetition}/>
+        changeToNextCompetition={this.changeToNextCompetition}
+        addWinner={this.addWinner}/>
+        </div> : 
+        <div>
+        <h1>이상형 월드컵이 종료되었습니다.</h1>
+        <img src={this.state.currentParticipants[0]} className={this.defaultAnimation}></img>
+        <figcaption>최종 이상형</figcaption>
         </div>
+        }
+       
+        </>
         );
     }
 }

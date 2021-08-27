@@ -20,8 +20,7 @@ function App() {
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         이상형 월드컵 
 
-        
-        <Tournaments numberOfParticipants={numberOfParticipants} images={getImages(numberOfParticipants)}></Tournaments>
+        <Tournaments numberOfParticipants={numberOfParticipants} currentParticipants={getImages(numberOfParticipants)}></Tournaments>
     </div>
   );
 }

@@ -21,21 +21,28 @@ export default class Tournament extends Component {
         let id = event.target.id
         let newAnimationForLeft;
         let newAnimationForRight;
+        let winner;
+        
         if(id === "left") {
             newAnimationForLeft = "focused";
             newAnimationForRight = "disappear"
+            winner = this.props.leftImage;
         }
         if(id === "right") {
             newAnimationForLeft = "disappear";
             newAnimationForRight = "focused";
+            winner = this.props.rightImage;
         }
       
+        this.props.addWinner(winner);
+
         let animationAddedState = {
             ...this.state,
             rightImageAnimation: this.state.rightImageAnimation.concat(newAnimationForRight),
             leftImageAnimation: this.state.leftImageAnimation.concat(newAnimationForLeft),
         };
         
+     
           this.setState((prevState) => animationAddedState, () => {
             setTimeout(() => {
                 this.props.changeToNextCompetition();
@@ -44,16 +51,17 @@ export default class Tournament extends Component {
                     rightImageAnimation: this.props.defaultAnimation,
                     leftImageAnimation: this.props.defaultAnimation,
                 });
-            }, 300);
+            }, 0);
           })
 
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
         
     }
 
-
     render() {
-       console.log("rendered occur");
-        console.log(this.state);
+      
         return (
             <article onClick={this.chooseIdealImage}>
                 <img src={this.props.leftImage} className={this.state.leftImageAnimation}  height={200} width={200} id="left"/>
